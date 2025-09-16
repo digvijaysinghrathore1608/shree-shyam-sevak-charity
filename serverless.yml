@@ -50,8 +50,8 @@ provider:
     DB_PASSWORD: ${ssm:/shreeshyamsevak/${sls:stage}/DB_PASSWORD}
 
     # Cache / Queue
-    CACHE_DRIVER: file
-    # DYNAMODB_CACHE_TABLE: ${ssm:/shreeshyamsevak/${sls:stage}/DYNAMODB_CACHE_TABLE}
+    CACHE_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/CACHE_DRIVER}
+    DYNAMODB_CACHE_TABLE: ${ssm:/shreeshyamsevak/${sls:stage}/DYNAMODB_CACHE_TABLE}
     QUEUE_CONNECTION: ${ssm:/shreeshyamsevak/${sls:stage}/QUEUE_CONNECTION}
     SQS_PREFIX: ${ssm:/shreeshyamsevak/${sls:stage}/SQS_PREFIX}
     SQS_QUEUE: ${ssm:/shreeshyamsevak/${sls:stage}/SQS_QUEUE}
@@ -70,7 +70,6 @@ provider:
     FILESYSTEM_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/FILESYSTEM_DRIVER}
     AWS_BUCKET: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_BUCKET}
     AWS_URL: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_URL}
-    AWS_DEFAULT_REGION: ap-south-1
 
 plugins:
   - ./vendor/bref/bref
