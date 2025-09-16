@@ -91,6 +91,7 @@ jobs:
           aws s3 sync public/front_landing s3://$AWS_BUCKET/front_landing/ --delete
           aws s3 sync public/css s3://$AWS_BUCKET/css/ --delete
           aws s3 cp public/favicon.ico s3://$AWS_BUCKET/favicon.ico
+          aws s3 cp public/mix-manifest.json s3://$AWS_BUCKET/mix-manifest.json
           
           # Optional: Invalidate CloudFront cache
           CLOUDFRONT_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?Origins.Items[0].DomainName=='$AWS_BUCKET.s3.ap-south-1.amazonaws.com'].Id | [0]" --output text)
