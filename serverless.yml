@@ -50,7 +50,7 @@ provider:
     DB_PASSWORD: ${ssm:/shreeshyamsevak/${sls:stage}/DB_PASSWORD}
 
     # Cache / Queue
-    CACHE_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/CACHE_DRIVER}
+    CACHE_DRIVER: file
     DYNAMODB_CACHE_TABLE: ${ssm:/shreeshyamsevak/${sls:stage}/DYNAMODB_CACHE_TABLE}
     QUEUE_CONNECTION: ${ssm:/shreeshyamsevak/${sls:stage}/QUEUE_CONNECTION}
     SQS_PREFIX: ${ssm:/shreeshyamsevak/${sls:stage}/SQS_PREFIX}
