@@ -72,6 +72,19 @@ provider:
 plugins:
   - ./vendor/bref/bref
 
+package:
+  exclude:
+    - public/assets/**
+    - public/fonts/**
+    - public/webfonts/**
+    - public/js/**
+    - public/img/**
+    - public/images/**
+    - public/front_landing/**
+    - public/css/**
+    - public/mix-manifest.json
+    - public/favicon.ico
+
 functions:
   web:
     handler: public/index.php

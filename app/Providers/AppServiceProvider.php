@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Mariuzzo\LaravelJsLocalization\Commands\LangJsCommand;
 use Mariuzzo\LaravelJsLocalization\Generators\LangJsGenerator;
@@ -22,9 +23,9 @@ class AppServiceProvider extends ServiceProvider
             $files = $app['files'];
 
             if ($laravelMajorVersion === 4) {
-                $langs = $app['path.base'].'/app/lang';
+                $langs = $app['path.base'] . '/app/lang';
             } elseif ($laravelMajorVersion >= 5 && $laravelMajorVersion < 9) {
-                $langs = $app['path.base'].'/resources/lang';
+                $langs = $app['path.base'] . '/resources/lang';
             } elseif ($laravelMajorVersion >= 9) {
                 $langs = app()->langPath();
             }
@@ -43,5 +44,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+        if (config('app.env') === 'prod') {
+            URL::forceScheme('https');
+        }
     }
 }
