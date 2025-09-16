@@ -13,6 +13,7 @@ provider:
     APP_KEY: ${ssm:/shreeshyamsevak/${sls:stage}/APP_KEY}
     APP_DEBUG: ${ssm:/shreeshyamsevak/${sls:stage}/APP_DEBUG}
     ASSET_URL: ${ssm:/shreeshyamsevak/${sls:stage}/ASSET_URL}
+    APP_URL: ${ssm:/shreeshyamsevak/${sls:stage}/APP_URL}
 
     
     VIEW_COMPILED_PATH: ${ssm:/shreeshyamsevak/${sls:stage}/VIEW_COMPILED_PATH}
