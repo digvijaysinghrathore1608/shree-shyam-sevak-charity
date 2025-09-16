@@ -70,6 +70,41 @@ provider:
     FILESYSTEM_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/FILESYSTEM_DRIVER}
     AWS_BUCKET: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_BUCKET}
     AWS_URL: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_URL}
+    AWS_DEFAULT_REGION: ap-south-1
+
+  iam:
+    role:
+      statements:
+        # DynamoDB permissions
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:Query
+            - dynamodb:Scan
+          Resource:
+            - arn:aws:dynamodb:ap-south-1:*:table/shree-shyam-sevak-cache-*
+
+        # SQS permissions
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+            - sqs:ReceiveMessage
+            - sqs:DeleteMessage
+            - sqs:GetQueueAttributes
+          Resource:
+            - arn:aws:sqs:ap-south-1:*:shree-shyam-sevak-queue-${sls:stage}
+
+        # S3 permissions
+        - Effect: Allow
+          Action:
+            - s3:GetObject
+            - s3:PutObject
+            - s3:DeleteObject
+          Resource:
+            - arn:aws:s3:::${ssm:/shreeshyamsevak/${sls:stage}/AWS_BUCKET}/*  
 
 plugins:
   - ./vendor/bref/bref
@@ -98,29 +133,12 @@ functions:
 
 resources:
   Resources:
-    LambdaExecutionRole:
-      Type: AWS::IAM::Role
-      Properties:
-        RoleName: shree-shyam-sevak-lambda-role
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service: lambda.amazonaws.com
-              Action: sts:AssumeRole
-        ManagedPolicyArns:
-          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-          - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
-          - arn:aws:iam::aws:policy/AmazonS3FullAccess
-          - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
-
     SQSQueue:
       Type: AWS::SQS::Queue
       Properties:
-        QueueName: shree-shyam-sevak-queue-${sls:stage}      
+        QueueName: shree-shyam-sevak-queue-${sls:stage}
 
-    DynamoDBTable:
+    CacheTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: shree-shyam-sevak-cache-${sls:stage}
@@ -130,4 +148,4 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-        BillingMode: PAY_PER_REQUEST    
+        BillingMode: PAY_PER_REQUEST
