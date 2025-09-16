@@ -140,6 +140,8 @@ resources:
 
     CacheTable:
       Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain   # <---- important
+      UpdateReplacePolicy: Retain
       Properties:
         TableName: shree-shyam-sevak-cache-${sls:stage}
         AttributeDefinitions:
