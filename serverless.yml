@@ -38,6 +38,7 @@ provider:
     SESSION_ENCRYPT: false
     SESSION_PATH: /
     SESSION_DOMAIN: null
+    SESSION_SECURE_COOKIE: false
 
     # Database
     DB_CONNECTION: ${ssm:/shreeshyamsevak/${sls:stage}/DB_CONNECTION}
