@@ -1,0 +1,1 @@
+$((function(){var e=$("#video-modal").overlay({expose:{color:"black",loadSpeed:200,opacity:.85},closeOnClick:!0,api:!0});$(".video-link").click((function(){e.load();var o=$(this).attr("href");return swfobject.embedSWF(o,"video-container","425","344","9.0.0","",{},{allowFullScreen:"true",allowscriptaccess:"always"},{}),!1}))}));

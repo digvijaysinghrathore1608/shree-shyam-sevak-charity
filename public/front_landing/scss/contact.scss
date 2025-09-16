@@ -1,0 +1,31 @@
+@import "../scss/variable.scss";
+
+.contact-section {
+    .icon {
+        i {
+            font-size: 36px;
+            @media (max-width: 575px) {
+                font-size: 26px;
+            }
+        }
+    }
+
+    .contact-form {
+        .map {
+            width: 100%;
+            height: 360px;
+        }
+    }
+
+    form {
+        .form-control {
+            border: 1px solid $gray-200;
+            padding: 17px 25px;
+
+            &:focus {
+                box-shadow: none;
+                border: 1px solid $gray-200;
+            }
+        }
+    }
+}

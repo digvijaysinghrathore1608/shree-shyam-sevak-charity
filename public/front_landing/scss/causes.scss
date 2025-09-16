@@ -1,0 +1,88 @@
+@import "../scss/variable.scss";
+
+.trending-causes-section {
+    .nav-tabs {
+        border-bottom: none;
+
+        .nav-item {
+            .active {
+                color: $primary;
+            }
+
+            .nav-link {
+                a {
+                    color: gray;
+                }
+
+                color: $gray;
+                position: relative;
+                display: block;
+                padding: 8px;
+                border-radius: 0;
+                border: 0;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    width: auto;
+                    height: 3px;
+                    color: $primary;
+                    background-color: $primary;
+                    left: 0;
+                    right: 0;
+                    display: none;
+                }
+            }
+
+            .active {
+                a {
+                    color: $primary;
+                }
+
+                color: $primary !important;
+                background-color: transparent !important;
+
+                &::after {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    button.owl-prev,
+    .owl-next {
+        position: absolute;
+        top: 24%;
+        transform: translateY(-50%);
+        background-color: transparent !important;
+        width: 20px;
+        height: 20px;
+        border-radius: 100% !important;
+        color: #000 !important;
+    }
+
+    button.owl-prev {
+        left: -30px;
+    }
+
+    button.owl-next {
+        right: -30px;
+    }
+
+    .owl-dots {
+        display: none;
+    }
+
+    .fade:not(.show) {
+        opacity: 1;
+    }
+
+    .owl-theme .owl-nav [class*="owl-"] {
+        font-size: 24px;
+        padding: 2px 4px;
+        background: #d6d6d6;
+        width: 20px;
+        height: 20px;
+    }
+}

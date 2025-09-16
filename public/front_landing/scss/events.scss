@@ -1,0 +1,188 @@
+@import "../scss/variable.scss";
+.upcoming-events-section {
+    .nav-tabs {
+        border-bottom: 0;
+        .item {
+            display: flex;
+            justify-content: center;
+                a {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: gray;
+                    flex-wrap: wrap;
+                    text-align: center;
+                    text-decoration: none;
+                    font-weight: 600;
+                    padding: 0 0 15px 0;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        width: auto;
+                        height: 3px;
+                        color: $primary !important;
+                        background-color: $primary !important;
+                        left: 0;
+                        right: 0;
+                        display: none;
+                    }
+
+                    &:focus,
+                    &.active,
+                    &:active,
+                    &:hover {
+                        color: $primary !important;
+
+                        &::after {
+                            display: block !important;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    button.owl-prev {
+        position: absolute;
+        left: 0px;
+        top: 6px;
+        transform: translateY(-50%);
+        background-color: transparent !important;
+
+        width: 20px;
+        height: 20px;
+        color: #000 !important;
+    }
+
+    button.owl-next {
+        position: absolute;
+        right: 0px;
+        top: 6px;
+        transform: translateY(-50%);
+        background-color: transparent !important;
+        width: 20px;
+        height: 20px;
+        color: #000 !important;
+    }
+
+    .owl-dots {
+        display: none;
+    }
+
+    button.owl-prev {
+        left: -30px;
+        @media (max-width: 575px) {
+            left: 0;
+        }
+    }
+
+    button.owl-next {
+        right: -30px;
+        @media (max-width: 575px) {
+            right: 0;
+        }
+    }
+
+    .fade {
+        opacity: 1;
+    }
+    .owl-theme .owl-nav {
+        margin-top: 0;
+    }
+    .owl-theme .owl-nav [class*="owl-"] {
+        font-size: 24px;
+        padding: 2px 4px;
+        background: #d6d6d6;
+        width: 20px;
+        height: 40px;
+    }
+
+    .card {
+        .card-img {
+            height: 250px;
+        }
+        .small-btn {
+            top: 0;
+            padding: 10px 15px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            &:hover {
+                background-color: $primary;
+                color: $white;
+            }
+        }
+        .card-body {
+            padding: 30px;
+            .card-text {
+                .text {
+                    position: relative;
+                    margin-bottom: 10px;
+                    display: flex;
+                    span {
+                        padding-left: 30px;
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            width: 15px;
+                            height: 3px;
+                            color: $primary;
+                            background-color: $primary;
+                            top: 12px;
+                            left: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .tab-content {
+        .content-box {
+            border-radius: 20px;
+        }
+
+        .header-content {
+            padding: 25px;
+            border-bottom: 1px solid $gray-200;
+            @media (max-width: 575px) {
+                padding: 20px;
+            }
+
+            .btn-close {
+                box-shadow: none;
+            }
+        }
+
+        .body-content {
+            padding: 30px 40px 0 40px;
+            @media (max-width: 575px) {
+                padding: 20px 20px 0 20px;
+            }
+
+            .custom-label {
+                font-size: 18px;
+            }
+
+            .custom-input {
+                border-radius: 10px;
+                font-size: 1rem;
+                background-color: #f5f8fa;
+                border-color: #f5f8fa;
+                color: #5e6278;
+                padding: 0.75rem 1rem;
+                box-shadow: none;
+                transition: color 0.2s ease, background-color 0.2s ease;
+            }
+        }
+
+        .footer-content {
+            border-top: 0;
+            padding: 10px 40px 30px 40px;
+            @media (max-width: 575px) {
+                padding: 5px 20px 20px 20px;
+            }
+        }
+    }
+}

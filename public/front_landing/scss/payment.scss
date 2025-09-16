@@ -1,0 +1,101 @@
+@import "../scss/variable.scss";
+
+.payment-left-section {
+    form {
+        .tags {
+            .tag {
+                padding: 8px 20px;
+                margin-right: 20px;
+                display: inline-block;
+            }
+        }
+
+        .input-group-prepend {
+            position: relative;
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 2px;
+                height: 30px;
+                background-color: $gray-200;
+                color: $gray-200;
+                right: 0;
+                top: 25%;
+            }
+        }
+
+        .input-group-text {
+            padding: 12px 25px;
+            height: 100%;
+            border-radius: 0;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            background-color: transparent;
+            border: 1px solid $gray-200;
+        }
+
+        .input-group {
+            .form-control {
+                border-left: 0;
+                padding: 12px 25px;
+
+                &:focus {
+                    border-left: 0;
+                }
+            }
+
+            ::placeholder {
+                color: $secondary;
+            }
+        }
+
+        .form-control {
+            border: 1px solid $gray-200;
+            padding: 17px 25px;
+
+            &:focus {
+                box-shadow: none;
+                border: 1px solid $gray-200;
+            }
+        }
+
+        .form-check-label {
+            width: 84px;
+            height: 30px;
+        }
+
+        .form-check-input[type="radio"] {
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+        }
+
+        .form-check-input:focus {
+            box-shadow: none;
+        }
+
+        .radio-button {
+            border: 1px solid $gray-200;
+        }
+    }
+}
+
+.about-section {
+    .rectangle-shape {
+        height: 12px;
+        background-color: $primary;
+        display: block;
+        width: 100px;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        position: absolute;
+        right: 0;
+        @media (max-width: 480px) {
+            width: 80px;
+        }
+        @media (max-width: 375px) {
+            width: 50px;
+        }
+    }
+}

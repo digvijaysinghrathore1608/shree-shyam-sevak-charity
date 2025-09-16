@@ -1,0 +1,81 @@
+.trending-causes-section .nav-tabs {
+    border-bottom: none
+}
+
+.trending-causes-section .nav-tabs .nav-item .active {
+    color: #009e74
+}
+
+.trending-causes-section .nav-tabs .nav-item .nav-link {
+    color: #757e81 !important;
+    position: relative;
+    display: block;
+    padding: 8px;
+    border-radius: 0;
+    border: 0
+}
+
+.trending-causes-section .nav-tabs .nav-item .nav-link a {
+    color: gray
+}
+
+.trending-causes-section .nav-tabs .nav-item .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: auto;
+    height: 3px;
+    color: #009e74;
+    background-color: #009e74;
+    left: 0;
+    right: 0;
+    display: none
+}
+
+.trending-causes-section .nav-tabs .nav-item .active {
+    color: #009e74 !important;
+    background-color: transparent !important
+}
+
+.trending-causes-section .nav-tabs .nav-item .active a {
+    color: #009e74
+}
+
+.trending-causes-section .nav-tabs .nav-item .active::after {
+    display: block
+}
+
+.trending-causes-section button.owl-prev, .trending-causes-section .owl-next {
+    position: absolute;
+    top: 24%;
+    transform: translateY(-50%);
+    background-color: transparent !important;
+    width: 20px;
+    height: 20px;
+    border-radius: 100% !important;
+    color: #000 !important
+}
+
+.trending-causes-section button.owl-prev {
+    left: -30px
+}
+
+.trending-causes-section button.owl-next {
+    right: -30px
+}
+
+.trending-causes-section .owl-dots {
+    display: none
+}
+
+.trending-causes-section .fade:not(.show) {
+    opacity: 1
+}
+
+.trending-causes-section .owl-theme .owl-nav [class*=owl-] {
+    font-size: 24px;
+    padding: 2px 4px;
+    background: #d6d6d6;
+    width: 20px;
+    height: 20px
+}

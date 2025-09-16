@@ -1,0 +1,111 @@
+service: shree-shyam-sevak
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: ap-south-1
+  runtime: provided.al2
+  environment:
+    APP_ENV: ${sls:stage}
+    APP_NAME: ${ssm:/shreeshyamsevak/${sls:stage}/APP_NAME}
+    APP_STORAGE: /tmp
+    APP_KEY: ${ssm:/shreeshyamsevak/${sls:stage}/APP_KEY}
+    APP_DEBUG: ${ssm:/shreeshyamsevak/${sls:stage}/APP_DEBUG}
+    ASSET_URL: ${ssm:/shreeshyamsevak/${sls:stage}/ASSET_URL}
+    DEBUGBAR_ENABLED: false
+
+    # App
+    APP_LOCALE: en
+    APP_FALLBACK_LOCALE: en
+    APP_FAKER_LOCALE: en_US
+    APP_MAINTENANCE_STORE: database
+    BCRYPT_ROUNDS: 12
+
+    # Logging
+    LOG_CHANNEL: errorlog
+    LOG_LEVEL: warning
+
+    # Session
+    SESSION_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/SESSION_DRIVER}
+    SESSION_LIFETIME: 120
+    SESSION_ENCRYPT: false
+    SESSION_PATH: /
+    SESSION_DOMAIN: null
+
+    # Database
+    DB_CONNECTION: ${ssm:/shreeshyamsevak/${sls:stage}/DB_CONNECTION}
+    DB_HOST: ${ssm:/shreeshyamsevak/${sls:stage}/DB_HOST}
+    DB_PORT: ${ssm:/shreeshyamsevak/${sls:stage}/DB_PORT}
+    DB_DATABASE: ${ssm:/shreeshyamsevak/${sls:stage}/DB_DATABASE}
+    DB_USERNAME: ${ssm:/shreeshyamsevak/${sls:stage}/DB_USERNAME}
+    DB_PASSWORD: ${ssm:/shreeshyamsevak/${sls:stage}/DB_PASSWORD}
+
+    # Cache / Queue
+    CACHE_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/CACHE_DRIVER}
+    DYNAMODB_CACHE_TABLE: ${ssm:/shreeshyamsevak/${sls:stage}/DYNAMODB_CACHE_TABLE}
+    QUEUE_CONNECTION: ${ssm:/shreeshyamsevak/${sls:stage}/QUEUE_CONNECTION}
+    SQS_PREFIX: ${ssm:/shreeshyamsevak/${sls:stage}/SQS_PREFIX}
+    SQS_QUEUE: ${ssm:/shreeshyamsevak/${sls:stage}/SQS_QUEUE}
+
+    # Mail
+    MAIL_MAILER: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_MAILER}
+    MAIL_HOST: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_HOST}
+    MAIL_PORT: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_PORT}
+    MAIL_USERNAME: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_USERNAME}
+    MAIL_PASSWORD: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_PASSWORD}
+    MAIL_ENCRYPTION: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_ENCRYPTION}
+    MAIL_FROM_ADDRESS: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_FROM_ADDRESS}
+    MAIL_FROM_NAME: ${ssm:/shreeshyamsevak/${sls:stage}/MAIL_FROM_NAME}
+
+    # Filesystem / S3
+    FILESYSTEM_DRIVER: ${ssm:/shreeshyamsevak/${sls:stage}/FILESYSTEM_DRIVER}
+    AWS_BUCKET: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_BUCKET}
+    AWS_URL: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_URL}
+
+plugins:
+  - ./vendor/bref/bref
+
+functions:
+  web:
+    handler: public/index.php
+    timeout: 28
+    layers:
+      - ${bref:layer.php-82-fpm}
+    events:
+      - httpApi: '*'
+
+resources:
+  Resources:
+    LambdaExecutionRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: shree-shyam-sevak-lambda-role
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: lambda.amazonaws.com
+              Action: sts:AssumeRole
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+          - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+          - arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+    SQSQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: shree-shyam-sevak-queue-${sls:stage}      
+
+    DynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: shree-shyam-sevak-cache-${sls:stage}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST    

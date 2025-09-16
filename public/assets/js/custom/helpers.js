@@ -1,0 +1,1 @@
+window.listen=function(n,o,i){$(document).on(n,o,i)};

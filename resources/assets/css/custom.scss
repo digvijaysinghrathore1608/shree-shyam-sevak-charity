@@ -1,0 +1,350 @@
+.show-image-detail {
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+.vh-ql-container {
+    max-height: 172px;
+    overflow-y: auto;
+    min-height: 172px;
+}
+
+//right side modal css
+.modal-right {
+    &.modal.fade {
+        .modal-dialog-right {
+            transform: translateY(0) translateX(0) !important;
+        }
+    }
+
+    .modal-dialog-right {
+        transform: translateY(-50px) !important;
+    }
+}
+
+//
+
+.vh-ql-container {
+    border: 1px solid #eff2f5;
+    border-top: 0;
+    border-bottom-right-radius: 0.475rem;
+    border-bottom-left-radius: 0.475rem;
+}
+
+
+.w-125px {
+    width: 125px !important;
+}
+
+.w-40px {
+    width: 40px !important;
+}
+.img-radio {
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    height: auto;
+    margin: auto;
+    padding: 5px;
+    position: relative;
+    width: 100%;
+}
+.img-radio img {
+    height: 400px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: top;
+    object-position: top;
+    transform-origin: 50% 50%;
+    transition-duration: .2s;
+    transition: all 5s ease;
+    width: 100%;
+}
+
+.logo-fix-size {
+    max-height: 60px !important;
+    max-width: 120px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+
+// Remove Arrows/Spinners(number fields)
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#showFaqModal {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+
+#showPagesModal {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+
+#showInquiriesModal {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+#showCampaignFaqModal{
+    .modal-content {
+        min-height: 100%;
+    }
+}
+#showCampaignUpdateModal{
+    .modal-content {
+        min-height: 100%;
+    }
+}
+
+#showTransactionModal {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+#showGiftTransactionModal {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+#showWithdrawModal {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+
+#paypalPaymentDetailsShowModel {
+    .modal-content {
+        min-height: 100%;
+    }
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden !important;
+}
+
+.swal-modal .swal-text {
+    text-align: center;
+}
+
+.progress {
+    display: flex;
+    width: 60px;
+    height: 60px !important;
+    border-radius: 50% !important;
+    background: conic-gradient(#6571ff var(--progress), #adb5bd 0%);
+    font-size: 0;
+    animation: 1.8s ease-out turn_in reverse;
+
+}
+
+.progress::after {
+    content: attr(data-progress) "%";
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 5px;
+    border-radius: 50%;
+    background: white;
+    font-size: 11px;
+    text-align: center;
+}
+
+#bankPaymentDetailsShowModel {
+    .modal-content {
+        min-height: 100%;
+    }
+
+}
+
+.img-radio.img-border {
+    border: 3px solid #0b9ef7 !important;
+    border-radius: 10px !important;
+}
+
+.img-box > input {
+    display: none;
+}
+
+.template-border {
+    border: 3px solid #0b9ef7 !important;
+    border-radius: 10px !important;
+}
+
+.btn-check {
+    &:focus+.btn {
+        outline: unset !important;
+        box-shadow: unset !important;
+    }
+}
+.btn {
+    &:focus {
+        outline: unset !important;
+        box-shadow:  unset !important;
+    }
+}
+
+.screen.image {
+    padding: 5px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    margin: auto;
+    border-radius: 5px;
+    height: auto;
+
+    img {
+        width: 100%;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        object-fit: cover;
+        object-position: top;
+        height: 400px;
+        transition: 5s all ease;
+    }
+
+    &:hover {
+        img {
+            object-position: bottom;
+        }
+    }
+}
+
+.img-radio {
+    padding: 5px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+    margin: auto;
+    border-radius: 5px;
+    height: auto;
+
+    img {
+        width: 100%;
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        object-fit: cover;
+        object-position: top;
+        height: 400px;
+        transition: 5s all ease;
+    }
+
+    &:hover {
+        img {
+            object-position: bottom;
+        }
+    }
+}
+
+.img-radio.img-border {
+    border: 3px solid #0b9ef7 !important;
+    border-radius: 10px !important;
+}
+@keyframes turn_in {
+    5% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .95), #adb5bd 0deg);
+    }
+    10% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .9), #adb5bd 0deg);
+    }
+    15% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .85), #adb5bd 0deg);
+    }
+    20% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .8), #adb5bd 0deg);
+    }
+    25% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .75), #adb5bd 0deg);
+    }
+    30% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .7), #adb5bd 0deg);
+    }
+    35% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .65), #adb5bd 0deg);
+    }
+    40% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .6), #adb5bd 0deg);
+    }
+    45% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .55), #adb5bd 0deg);
+    }
+    50% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .5), #adb5bd 0deg);
+    }
+    55% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .45), #adb5bd 0deg);
+    }
+    60% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .4), #adb5bd 0deg);
+    }
+    65% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .35), #adb5bd 0deg);
+    }
+    70% {
+        background: conic-gradient(#6571ff calc(var(--progress) * 0.3), #adb5bd 0deg);
+    }
+    75% {
+        background: conic-gradient(#6571ff calc(var(--progress) * 0.25), #adb5bd 0deg);
+    }
+    80% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .2), #adb5bd 0deg);
+    }
+    85% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .15), #adb5bd 0deg);
+    }
+    90% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .1), #adb5bd 0deg);
+    }
+    95% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .05), #adb5bd 0deg);
+    }
+    100% {
+        background: conic-gradient(#6571ff calc(var(--progress) * .05), #adb5bd 0deg);
+
+    }
+}
+@media (min-width: 501px) {
+    .swal-modal {
+        width: 410px;
+    }
+}
+.swal-icon--custom img {
+    height: 80px;
+    width: 74px;
+}
+
+.gift-field-wrap {
+    position: relative;
+    background-color: #f2f2f2;
+    padding: 30px;
+    padding-right: 70px;
+    margin-bottom: 10px;
+}
+
+.dropzone {
+    .dz-error-message {
+        margin-top: 10px;
+    }
+
+    .dz-image {
+        img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+    }
+}

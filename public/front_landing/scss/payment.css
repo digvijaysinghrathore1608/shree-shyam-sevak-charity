@@ -1,0 +1,103 @@
+.payment-left-section form .tags .tag {
+    padding: 8px 20px;
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.payment-left-section form .input-group-prepend {
+    position: relative;
+}
+
+.payment-left-section form .input-group-prepend::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background-color: #e9edee;
+    color: #e9edee;
+    right: 0;
+    top: 25%;
+}
+
+.payment-left-section form .input-group-text {
+    padding: 12px 25px;
+    height: 90%;
+    border-radius: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: transparent;
+    border: 1px solid #e9edee;
+}
+
+.payment-left-section form .input-group .form-control {
+    border-left: 0;
+    padding: 12px 25px;
+}
+
+.payment-left-section form .input-group .form-control:focus {
+    border-left: 0;
+}
+
+.payment-left-section form .input-group ::-moz-placeholder {
+    color: #001d24;
+}
+
+.payment-left-section form .input-group :-ms-input-placeholder {
+    color: #001d24;
+}
+
+.payment-left-section form .input-group ::placeholder {
+    color: #001d24;
+}
+
+.payment-left-section form .form-control {
+    border: 1px solid #e9edee;
+    padding: 17px 25px;
+}
+
+.payment-left-section form .form-control:focus {
+    box-shadow: none;
+    border: 1px solid #e9edee;
+}
+
+.payment-left-section form .form-check-label {
+    width: 84px;
+    height: 30px;
+}
+
+.payment-left-section form .form-check-input[type="radio"] {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.payment-left-section form .form-check-input:focus {
+    box-shadow: none;
+}
+
+.payment-left-section form .radio-button {
+    border: 1px solid #e9edee;
+}
+
+.about-section .rectangle-shape {
+    height: 12px;
+    background-color: #009e74;
+    display: block;
+    width: 100px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    position: absolute;
+    right: 0;
+}
+
+@media (max-width: 480px) {
+    .about-section .rectangle-shape {
+        width: 80px;
+    }
+}
+
+@media (max-width: 375px) {
+    .about-section .rectangle-shape {
+        width: 50px;
+    }
+}
