@@ -21,8 +21,8 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
   
     <link href="{{asset('css/front-third-party.css')}}" rel="stylesheet">
-    <link href="{{ mix('css/front-pages.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ mix('css/front-custom.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/front-pages.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/front-custom.css') }}" rel="stylesheet" type="text/css">
 
   
     @livewireStyles
@@ -39,7 +39,7 @@
             $('.alert').delay(5000).slideUp(300)
         })
     </script>
-    <script src="{{ mix('js/front-pages.js') }}"></script>
+    <script src="{{ asset('js/front-pages.js') }}"></script>
     <script src="https://js.stripe.com/v3/"></script>
     @yield('page_js')
 </head>

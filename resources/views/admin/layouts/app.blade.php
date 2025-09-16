@@ -35,8 +35,8 @@
         let sweetWithdrawAlertIcon = '{{asset('images/Alert.png')}}'
         let paypalPaymentType = '{{ \App\Models\Withdraw::PAYPAL }}'
     </script>
-    <script src="{{ mix('js/third-party.js') }}"></script>
-    <script src="{{ mix('js/pages.js') }}"></script>
+    <script src="{{ asset('js/third-party.js') }}"></script>
+    <script src="{{ asset('js/pages.js') }}"></script>
     @yield('scripts')
 </head>
 

@@ -34,9 +34,9 @@
     </div>
 </footer>
 <!-- Scripts -->
-<script src="{{ mix('js/third-party.js') }}"></script>
+<script src="{{ asset('js/third-party.js') }}"></script>
 <script src="{{ asset('assets/js/custom/helpers.js') }}"></script>
-<script src="{{ mix('assets/js/auth/auth.js') }}"></script>
+<script src="{{ asset('assets/js/auth/auth.js') }}"></script>
 
 @stack('scripts')
 <script>
