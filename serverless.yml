@@ -4,7 +4,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  region: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_DEFAULT_REGION}
+  region: ap-south-1
   runtime: provided.al2
   environment:
     APP_ENV: ${sls:stage}
@@ -94,7 +94,7 @@ provider:
           - DynamoDBTable
           - Arn
 
-          
+
     # ✅ Allow SSM access (because tum env vars SSM se le rahe ho)
     - Effect: Allow
       Action:
