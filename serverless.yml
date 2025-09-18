@@ -4,7 +4,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  region: ap-south-1
+  region: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_DEFAULT_REGION}
   runtime: provided.al2
   environment:
     APP_ENV: ${sls:stage}
@@ -71,6 +71,38 @@ provider:
     AWS_BUCKET: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_BUCKET}
     AWS_URL: ${ssm:/shreeshyamsevak/${sls:stage}/AWS_URL}
 
+
+  iamRoleStatements:
+    # ✅ Allow writing logs
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+        - logs:TagResource
+      Resource: arn:aws:logs:${ssm:/shreeshyamsevak/${sls:stage}/AWS_DEFAULT_REGION}:*:*:*
+    
+    # ✅ Allow DynamoDB access for cache table
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        Fn::GetAtt:
+          - DynamoDBTable
+          - Arn
+
+          
+    # ✅ Allow SSM access (because tum env vars SSM se le rahe ho)
+    - Effect: Allow
+      Action:
+        - ssm:GetParameter
+        - ssm:GetParameters
+        - ssm:GetParametersByPath
+      Resource: arn:aws:ssm:${ssm:/shreeshyamsevak/${sls:stage}/AWS_DEFAULT_REGION}:*:parameter/shreeshyamsevak/${sls:stage}/*  
+
 plugins:
   - ./vendor/bref/bref
 
@@ -98,22 +130,22 @@ functions:
 
 resources:
   Resources:
-    LambdaExecutionRole:
-      Type: AWS::IAM::Role
-      Properties:
-        RoleName: shree-shyam-sevak-lambda-role
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service: lambda.amazonaws.com
-              Action: sts:AssumeRole
-        ManagedPolicyArns:
-          - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-          - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
-          - arn:aws:iam::aws:policy/AmazonS3FullAccess
-          - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+    # LambdaExecutionRole:
+    #   Type: AWS::IAM::Role
+    #   Properties:
+    #     RoleName: shree-shyam-sevak-lambda-role
+    #     AssumeRolePolicyDocument:
+    #       Version: "2012-10-17"
+    #       Statement:
+    #         - Effect: Allow
+    #           Principal:
+    #             Service: lambda.amazonaws.com
+    #           Action: sts:AssumeRole
+    #     ManagedPolicyArns:
+    #       - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    #       - arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess
+    #       - arn:aws:iam::aws:policy/AmazonS3FullAccess
+    #       - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
 
     SQSQueue:
       Type: AWS::SQS::Queue
