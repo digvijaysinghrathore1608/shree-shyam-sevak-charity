@@ -43,7 +43,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy Lambda
-        run: serverless deploy --stage=${{ secrets.ENVIRONMENT }}
+        run: serverless deploy --stage=${{ secrets.ENVIRONMENT }} --force
 
 
       - name: Fetch SSM Parameters
