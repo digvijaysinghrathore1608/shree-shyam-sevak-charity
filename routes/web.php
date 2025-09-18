@@ -18,6 +18,10 @@ Route::get('/html', function () {
     return view('html');
 });
 
+Route::get('/test-ip', function (\Illuminate\Http\Request $request) {
+    return $request->ip();
+});
+
 //Route::get('/', function () {
 //    return (! Auth::check()) ? view('auth.login') : Redirect::to(getDashboardURL());
 //})->name('login');
