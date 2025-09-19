@@ -19,7 +19,7 @@ jobs:
         run: |
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
           RELEASE_DIR="/home/ubuntu/shreeshyamsevak_releases/$TIMESTAMP"
-          ssh ubuntu@${{ secrets.EC2_HOST }} "
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "
             mkdir -p $RELEASE_DIR;
             rsync -avz --delete --exclude='.git' --exclude='node_modules' ./ $RELEASE_DIR;
             
