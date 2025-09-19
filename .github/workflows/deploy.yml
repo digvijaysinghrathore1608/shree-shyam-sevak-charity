@@ -17,24 +17,9 @@ jobs:
 
       - name: Rsync code to temporary release
         run: |
-          RELEASE_DIR="/home/ubuntu/shreeshyamsevak_releases"
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "
-            mkdir -p $RELEASE_DIR;
-            rsync -avz --delete --exclude='.git' --exclude='node_modules' ./ $RELEASE_DIR;
-            
-            # Set ownerships
-            sudo chown -R www-data:www-data $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache;
-            sudo chmod -R 775 $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache;
+          rsync -avz --delete --exclude='.git' --exclude='node_modules' -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/shreeshyamsevak_release
 
-            # Go to release folder
-            cd $RELEASE_DIR;
 
-            # Install PHP dependencies
-            composer install --no-dev --optimize-autoloader;
-
-            # Laravel cache & migrate
-            php artisan migrate --force;
-            php artisan config:cache;
-            php artisan route:cache;
-            php artisan view:cache;
-          "
+      - name: Run deploy script
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /home/ubuntu/fetch_env.sh prod"    
