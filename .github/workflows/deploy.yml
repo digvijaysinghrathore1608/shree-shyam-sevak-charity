@@ -22,4 +22,4 @@ jobs:
 
       - name: Run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /home/ubuntu/fetch_env.sh prod"    
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /home/ubuntu/shreeshyamsevak_release/fetch_env.sh prod"    
