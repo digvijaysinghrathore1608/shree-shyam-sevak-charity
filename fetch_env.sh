@@ -11,8 +11,8 @@ DB_HOST=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/DB_HOST" --with-
 DB_DATABASE=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/DB_DATABASE" --with-decryption --query "Parameter.Value" --output text)
 DB_USERNAME=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/DB_USERNAME" --with-decryption --query "Parameter.Value" --output text)
 DB_PASSWORD=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/DB_PASSWORD" --with-decryption --query "Parameter.Value" --output text)
-AWS_BUCKET=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/AWS_BUCKET" --with-decryption --query "Parameter.Value" --output text)
 FILESYSTEM_DRIVER=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/FILESYSTEM_DRIVER" --with-decryption --query "Parameter.Value" --output text)
+MEDIA_DISK=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/FILESYSTEM_DRIVER" --with-decryption --query "Parameter.Value" --output text)
 
 # Function to update or add env key
 update_env() {
@@ -33,9 +33,8 @@ update_env DB_HOST "$DB_HOST"
 update_env DB_DATABASE "$DB_DATABASE"
 update_env DB_USERNAME "$DB_USERNAME"
 update_env DB_PASSWORD "$DB_PASSWORD"
-update_env AWS_BUCKET "$AWS_BUCKET"
 update_env FILESYSTEM_DISK "$FILESYSTEM_DRIVER"
-
+update_env MEDIA_DISK "$FILESYSTEM_DRIVER"
 
 composer install --no-dev --optimize-autoloader
 php artisan migrate --force
