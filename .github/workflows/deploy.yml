@@ -17,7 +17,7 @@ jobs:
 
       - name: Rsync code
         run: |
-          rsync -avz --delete --exclude='.git' --exclude='node_modules' ./ ubuntu@${{ secrets.EC2_HOST }}:/var/www/shreeshyamsevak
+          rsync -avz --delete --exclude='.git' --exclude='node_modules' -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/var/www/shreeshyamsevak
 
       - name: Run deploy script
         run: |
