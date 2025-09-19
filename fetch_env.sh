@@ -1,5 +1,4 @@
 #!/bin/bash
-cd /var/www/shreeshyamsevak
 STAGE=$1  # yeh argument se lega jaise "prod" ya "dev"
 
 APP_NAME=$(aws ssm get-parameter --name "/shreeshyamsevak/$STAGE/APP_NAME" --with-decryption --query "Parameter.Value" --output text)
