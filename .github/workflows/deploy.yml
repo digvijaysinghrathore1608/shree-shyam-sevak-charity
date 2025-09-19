@@ -17,9 +17,9 @@ jobs:
 
       - name: Rsync code to temporary release
         run: |
-          rsync -avz --delete --exclude='.git' --exclude='node_modules' -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/shreeshyamsevak_release
+          rsync -avz --delete --exclude='.git' --exclude='node_modules' -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/home/ubuntu/shreeshyamsevak
 
 
       - name: Run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /home/ubuntu/shreeshyamsevak_release/fetch_env.sh prod"    
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /home/ubuntu/shreeshyamsevak/fetch_env.sh prod"    
