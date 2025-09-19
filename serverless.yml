@@ -7,7 +7,7 @@ provider:
   region: ap-south-1
   runtime: provided.al2
   environment:
-    APP_ENV: ${sls:stage}
+    APP_ENV: local
     APP_NAME: ${ssm:/shreeshyamsevak/${sls:stage}/APP_NAME}
     APP_STORAGE: /tmp
     APP_KEY: ${ssm:/shreeshyamsevak/${sls:stage}/APP_KEY}

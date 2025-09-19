@@ -22,6 +22,27 @@ Route::get('/test-ip', function (\Illuminate\Http\Request $request) {
     return $request->ip();
 });
 
+Route::get('/debug-env', function () {
+    // saare environment variables fetch karna
+    $env = $_ENV; 
+    
+    // Laravel ke env() helper se bhi individually check kar sakte ho
+    $important = [
+        'APP_ENV' => env('APP_ENV'),
+        'APP_NAME' => env('APP_NAME'),
+        'AWS_ACCESS_KEY_ID' => env('AWS_ACCESS_KEY_ID'),
+        'AWS_SECRET_ACCESS_KEY' => env('AWS_SECRET_ACCESS_KEY'),
+        'AWS_SESSION_TOKEN' => env('AWS_SESSION_TOKEN'),
+        'AWS_DEFAULT_REGION' => env('AWS_DEFAULT_REGION'),
+        'DYNAMODB_CACHE_TABLE' => env('DYNAMODB_CACHE_TABLE'),
+    ];
+
+    return response()->json([
+        'all_env' => $env,
+        'important_env' => $important,
+    ]);
+});
+
 //Route::get('/', function () {
 //    return (! Auth::check()) ? view('auth.login') : Redirect::to(getDashboardURL());
 //})->name('login');
