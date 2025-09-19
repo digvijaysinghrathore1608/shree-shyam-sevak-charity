@@ -24,13 +24,13 @@ jobs:
             rsync -avz --delete --exclude='.git' --exclude='node_modules' ./ $RELEASE_DIR;
             
             # Set ownerships
-            sudo chown -R ubuntu:ubuntu $RELEASE_DIR;
+            # sudo chown -R ubuntu:ubuntu $RELEASE_DIR;
             sudo chown -R www-data:www-data $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache;
-            sudo find $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache -type d -exec chmod 775 {} \;
-            sudo find $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache -type f -exec chmod 664 {} \;
-            sudo chown -R ubuntu:www-data $RELEASE_DIR/public;
-            sudo find $RELEASE_DIR/public -type d -exec chmod 755 {} \;
-            sudo find $RELEASE_DIR/public -type f -exec chmod 644 {} \;
+            sudo chmod -R 775 $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache;
+
+            # sudo chown -R ubuntu:www-data $RELEASE_DIR/public;
+            # sudo find $RELEASE_DIR/public -type d -exec chmod 755 {} \;
+            # sudo find $RELEASE_DIR/public -type f -exec chmod 644 {} \;
 
             # Symlink to current
             ln -sfn $RELEASE_DIR /home/ubuntu/shreeshyamsevak_current;
