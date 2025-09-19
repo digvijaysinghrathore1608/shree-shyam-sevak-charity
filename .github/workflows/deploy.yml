@@ -17,8 +17,12 @@ jobs:
 
       - name: Rsync code
         run: |
-          rsync -avz --delete --exclude='.git' --exclude='node_modules' -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/var/www/shreeshyamsevak
+          rsync -avz --delete --exclude='.git' --exclude='node_modules' --chown=www-data:www-data \
+            -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/var/www/shreeshyamsevak
+
 
       - name: Run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /var/www/shreeshyamsevak/fetch_env.sh prod"
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
+            "sudo -u www-data bash /var/www/shreeshyamsevak/fetch_env.sh prod"
+
