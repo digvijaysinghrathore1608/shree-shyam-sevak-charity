@@ -17,12 +17,14 @@ jobs:
 
       - name: Rsync code
         run: |
-          rsync -avz --delete --exclude='.git' --exclude='node_modules' --chown=www-data:www-data \
-            -e "ssh -o StrictHostKeyChecking=no" ./ ubuntu@${{ secrets.EC2_HOST }}:/var/www/shreeshyamsevak
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "
+            rsync -avz --delete --exclude='.git' --exclude='node_modules' ./ /var/www/shreeshyamsevak;
+            sudo chown -R www-data:www-data /var/www/shreeshyamsevak;
+            sudo find /var/www/shreeshyamsevak/storage /var/www/shreeshyamsevak/bootstrap/cache -type d -exec chmod 775 {} \;
+            sudo find /var/www/shreeshyamsevak/storage /var/www/shreeshyamsevak/bootstrap/cache -type f -exec chmod 664 {} \;
+          "
 
 
       - name: Run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} \
-            "sudo -u www-data bash /var/www/shreeshyamsevak/fetch_env.sh prod"
-
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "bash /var/www/shreeshyamsevak/fetch_env.sh prod"
