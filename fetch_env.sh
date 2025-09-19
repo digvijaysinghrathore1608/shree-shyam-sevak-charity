@@ -33,7 +33,7 @@ update_env DB_DATABASE "$DB_DATABASE"
 update_env DB_USERNAME "$DB_USERNAME"
 update_env DB_PASSWORD "$DB_PASSWORD"
 update_env AWS_BUCKET "$AWS_BUCKET"
-update_env FILESYSTEM_DRIVER "$FILESYSTEM_DRIVER"
+update_env FILESYSTEM_DISK "$FILESYSTEM_DRIVER"
 
 
 composer install --no-dev --optimize-autoloader
