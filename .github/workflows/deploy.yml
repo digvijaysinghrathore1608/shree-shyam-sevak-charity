@@ -1,0 +1,52 @@
+name: Deploy Laravel to EC2
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Rsync code to temporary release
+        run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          RELEASE_DIR="/home/ubuntu/shreeshyamsevak_releases/$TIMESTAMP"
+          ssh ubuntu@${{ secrets.EC2_HOST }} "
+            mkdir -p $RELEASE_DIR;
+            rsync -avz --delete --exclude='.git' --exclude='node_modules' ./ $RELEASE_DIR;
+            
+            # Set ownerships
+            sudo chown -R ubuntu:ubuntu $RELEASE_DIR;
+            sudo chown -R www-data:www-data $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache;
+            sudo find $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache -type d -exec chmod 775 {} \;
+            sudo find $RELEASE_DIR/storage $RELEASE_DIR/bootstrap/cache -type f -exec chmod 664 {} \;
+            sudo chown -R ubuntu:www-data $RELEASE_DIR/public;
+            sudo find $RELEASE_DIR/public -type d -exec chmod 755 {} \;
+            sudo find $RELEASE_DIR/public -type f -exec chmod 644 {} \;
+
+            # Symlink to current
+            ln -sfn $RELEASE_DIR /home/ubuntu/shreeshyamsevak_current;
+
+            # Go to release folder
+            cd /home/ubuntu/shreeshyamsevak_current;
+
+            # Install PHP dependencies
+            composer install --no-dev --optimize-autoloader;
+
+            # Laravel cache & migrate
+            php artisan migrate --force;
+            php artisan config:cache;
+            php artisan route:cache;
+            php artisan view:cache;
+
+            # Delete old releases (keep only last 1)
+            ls -dt /home/ubuntu/shreeshyamsevak_releases/* | tail -n +2 | xargs rm -rf
+          "
